@@ -1,58 +1,56 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 #include <string.h>
 
 #define MOD 1000000
 
 using namespace std;
- 
-bool is_alpha(string code, int n){ // n번째 자리+ n-1번째자리가 0~26인가 ex. 25114, 3 -> true(11)
-    int idx = code.length() - n; // 암호 끊을 길이
-    string a = code.substr(idx, 2);
-    // cout << ">>>>>" << idx <<  "; " << a << endl;
-    if (stoi(a) > 26)
-        return false;
-    else if (a[0] == '0')
-        return false;
-    else
-        return true;
-    
-   
-    
-}
+
 
 int main(){
 
     string code;
-
     cin >> code;
 
-    int length = code.length(); // 암호 길이
+    int length = code.length(); // 암호 길이 1~5000
 
-    long long dp[length+1] = {0, }; // 길이로 자른 나올 수 있는 암호!
-    memset(dp, 0, sizeof(dp));
+    long long dp[length+1] = {0, }; //나올 수 있는 해석의 가짓수를 1000000으로 나눈 나머지
+    memset(dp, 0, sizeof(dp)); // 0으로 초기화
 
+    int num[length+1]; // 문자열 -> int 
+    for (int i=0; i<length; i++)
+        num[i+1] = code[i] - '0'; // 문자열 -> int 
+    
+    if (num[1] == 0)  // 1. 맨 앞자리가 0일 경우 -> 0
+        dp[length] = 0;
 
-    int n = stoi(code); // 암호 string -> int 로 변환
-   
-    dp[1] = (n!=0)? 1 : 0; // N번째 글자로 나오는 건 하나뿐
-
-    if (length > 1){
-        dp[2] = (is_alpha(code, 2))? 2 : 1;
-
-        for (int i=3; i<=length; i++){
-            dp[i] = dp[i-1];
-            if (is_alpha(code, i)){
-                dp[i] += dp[i-2];
-                // cout << dp[i-11] << "+ " << dp[i-2] << endl;
+    else{
+        dp[0] = 1;
+            // 1자리 암호일 경우
+        dp[1] = 1; // 1~9 = 1
+        for (int i=2; i<=length; i++){
+            if (num[i] == 0){  // 2. 현재 숫자가 0일 경우 : 앞에 숫자가 1이나 2면 OK 아니면 0 
+                if (num[i-1] == 1 || num[i-1] == 2) // 10, 20
+                    dp[i] = dp[i-2];
+                else // 30, 40, ...
+                    dp[i] = 0;
             }
-            dp[i] %=MOD;
-        }
+            else{ // 2. 현재 숫자가 0이 아닐 경우
+                int a = num[i-1] * 10 + num[i] ;
+                if (a<= 26 && num[i-1] != 0){  // 11~19, 21~26 
+                    dp[i] = dp[i-1] + dp[i-2]; 
+                }
 
+                else{ // 27 이상이거나 01~09
+                    dp[i] = dp[i-1]; 
+                }
+            }
+            
+            dp[i] %= MOD;
+        }
     }
-   
     cout << dp[length] << endl;
+    
 
     return 0;
 }
