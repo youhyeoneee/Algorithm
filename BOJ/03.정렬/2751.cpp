@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,10 +10,17 @@ int main(){
     int a[N+1] = {0, };// 수열
 
     a[0] = 0;
-    for(int i=1; i<=N; i++)
-        cin >> a[i];
 
-    for(int i=1; i<=N)
+    // 입력
+    for(int i=0; i<N; i++)
+        cin >> a[i];
+ 
+    // Quick Sort
+    sort(a, a+N);
+
+    // 출력 
+    for(int i=0; i<N; i++)
+        cout << a[i] << '\n';
 
     return 0;
 }
