@@ -3,6 +3,8 @@
 
 ## BOJ
 
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=qqff0311)](https://solved.ac/qqff0311/)
+
 ### 01. 입출력
 
 - [x] 220303 - 2557, 1000, 2558, 10950, 10951, 10952, 10953, 11021, 11022
