@@ -86,3 +86,6 @@
 ### Summer/Winter Coding (~2018)
 - [x] 220504 - 소수만들기(풀다 말음)
 - [x] 220506 - 소수만들기, 예산
+
+### Skill Check 
+- [x] 220524 - Level1, Level2
