@@ -30,6 +30,8 @@ int dfs(int curr, int parent) {
       minOrder = low < minOrder ? low : minOrder;
     }
   }
+
+  // 루트노드일경우 자식이 2개 이상이면 단절점.
   if (parent == 0 && child >= 2) CutVertex[curr] = 1;
   return minOrder;
 }

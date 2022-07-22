@@ -5,52 +5,82 @@ using namespace std;
 
 // A. 단절점
 
-int V, E; // 그래프가 V개의 정점과 E개의 간선으로 이루어져 있다
-int a, b;
-stack<int> s;
-vector<int> G[10001];
+int V, E, a, b; // 그래프가 V개의 정점과 E개의 간선으로 이루어져 있다
+vector<int> AL[10001]; // 인접 리스트
 
-int order = 0;
-int visited[10001] = {0, }; // order 저장
-int dfs(int curr, int parent){
+int visit_order[10001]; // 방문 순서 저장됨. 미방문 = 0 
+int cut_vertex[10001]; // 각 정점이 단절점인지의 여부 저장
+vector<int> result; // 단절점 정보
 
-    visited[curr] = ++order; // 방문 order 저장
+int order = 0; // 방문 순서 
+
+int dfs(int curr, int parent){ // 현재 노드의 low 반환해야 함.
+    visit_order[curr] = ++order; // 방문 순서 저장
+
+    // 내 부모에게 넘겨줄 low (현재 나의 return 값) 저장하는 변수
+    // 나와 연결된 점을 방문했을 때 방문한 연결 점이 방문했던 점들 중 order가 가장 빠름. 
+    int min_order = visit_order[curr]; 
+    
+    // child의 개수 저장
     int child = 0;
 
-    for(int next : G[curr]){
-        if (next == parent) continue;
+    for (int next : AL[curr]){
+        if (next == parent) continue; // 부모 노드 인 경우 pass
+        if (visit_order[next] > 0){ // 다음 정점이 이미 방문한 정점일 경우
 
-        // 부모 노드가 아닌 경우 next에 방문 시도를 해 본다.
-        if (visited[next] > 0)  // next 가 이미 방문을 한 노드인 경우
-            minOrder = (visited[next] < minOrder)? visited[next] : minOrder;
-            // DST 의 관점에서 보면 이러한 노드들은 curr의 조상인 경우 외엔 존재할 수 없다.
-            // 다시 말해, next 노드는 현재 dfs 작업이 끝난 상태가 아니므로, 
-            // next 노드에서의 유효한 order 값은 visited[next] 가 유일하다.
+            // min order 갱신
 
-        else { // next 가 미 방문 상태인 경우
-            chilt++;
+            min_order = (visit_order[next] < min_order)? visit_order[next] : min_order;
+        }
+        else{ // 다음 정점이 아직 미방문인 경우
+            ++child;
             int low = dfs(next, curr);
 
-             if (parent != 0 && visited[curr] <= low) CutVertex[curr] = 1;
-
+            if (parent != 0 && visit_order[curr] <= low) cut_vertex[curr] = 1;
+            
+            min_order = (low < min_order)? low : min_order;
         }
+    }
+
+    if (parent == 0 && child >= 2) cut_vertex[curr] = 1;
+    return min_order;
 }
-}
-return lo
+
+// 단절점 판단 : 부모와 자식이 나를 통해 연결이 되어 있는가!!
 
 
 int main(){
 
+    // input
     cin >> V >> E;
 
     for(int i=0; i<E; i++){
         cin >> a >> b;
 
-        G[a].push_back(b);
-        G[b].push_back(a);
+        AL[a].push_back(b);
+        AL[b].push_back(a);
     }
 
-    dfs(1);
- 
+    // processing
+
+    for(int i=1; i<=V; i++){ 
+        // 부모노드 같이 들고 다니면서 저장
+        if (visit_order[i] == 0) dfs(i, 0);
+    }
+
+    for(int i=1; i<=V; i++){
+        if (cut_vertex[i]) result.push_back(i);
+    }
+
+    // output
+
+
+    // 첫째 줄에 단절점의 개수를 출력한다.
+    cout << result.size() << '\n';
+
+    // 둘째 줄에는 단절점의 번호를 공백으로 구분해 오름차순으로 출력한다.
+    for(int i : result){
+        cout << i << " ";
+    }
     return 0;
 }
