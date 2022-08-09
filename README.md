@@ -153,14 +153,20 @@ C++ 알고리즘 TIL 기록 Repository
 
 **02. 비트 연산**
 - [x] 220727 - 새로운 불면증 치료법, 이진수 표현
-- 동아리실 관리하기
+- [ ] 동아리실 관리하기
 
 **03. 연결 리스트**
 - [x] 220728 - 기초 Singly Linked List 연습, 기초 Double Linked List 연습, 암호문3, 수열 편집
 
 **04. 트리**
-- 중위순회, 사칙연산 유효성 검사, 사칙연산, 공통 조상
-- [Directory](https://swexpertacademy.com/main/help/review/contentsReviewDetail.do?contentId=15571)
+- [x] 220809 - 중위순회, 사칙연산 유효성 검사, 사칙연산, 공통 조상
+- [ ] [Directory](https://swexpertacademy.com/main/help/review/contentsReviewDetail.do?contentId=15571)
+
+**05. 그래프**
+- [ ] 기초 DFS 연습, 기초 BFS 연습
+- [ ] 프로세서 연결하기, 파핑파핑 지뢰 찾기, 영준이의 진짜 BFS
+
+
 -----
 
 ## Programmers
