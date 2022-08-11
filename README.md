@@ -163,8 +163,9 @@ C++ 알고리즘 TIL 기록 Repository
 - [ ] [Directory](https://swexpertacademy.com/main/help/review/contentsReviewDetail.do?contentId=15571)
 
 **05. 그래프**
-- [ ] [기초 DFS 연습, 기초 BFS 연습](https://swexpertacademy.com/main/help/review/contentsReviewList.do)
-- [ ] 프로세서 연결하기, 파핑파핑 지뢰 찾기, 영준이의 진짜 BFS
+- [x] 220811 - [기초 DFS 연습, 기초 BFS 연습](https://swexpertacademy.com/main/help/review/contentsReviewList.do)
+- [x] 220811 - 프로세서 연결하기, 파핑파핑 지뢰 찾기
+- [ ] 영준이의 진짜 BFS
 
 
 -----
