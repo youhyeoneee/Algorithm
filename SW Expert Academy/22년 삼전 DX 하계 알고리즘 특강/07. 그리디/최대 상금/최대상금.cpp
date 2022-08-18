@@ -1,55 +1,45 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-// 11 / 15 (오답)
-
+#include<bits/stdc++.h>
 using namespace std;
-
-int test_case;
-int T, N;
-string num;
-int result = 0;
-
-void dfs(int idx, int change){
-
-    if (change == N){
-        result = max(result, stoi(num));
+string a;
+int ret, n, T;
+void go(int here, int _n){
+    if(_n == 0){
+        cout << a << "\n";
+        ret = max(ret, atoi(a.c_str()));
         return;
     }
-    else{
-        for(int i=idx; i<num.length(); i++){
-            for(int j=i+1; j<num.length(); j++){
-                if (num[j] >= num[i]){
-                    swap(num[i], num[j]);
-                    dfs(i, change+1);
-                    swap(num[i], num[j]);
-                }
+    for(int i = here; i < a.size(); i++){
+        for(int j = i + 1; j < a.size(); j++){
+            if(a[i] < a[j]){
+                swap(a[i], a[j]);
+                go(i, _n - 1);
+                swap(a[i], a[j]);
             }
         }
     }
+    if(_n % 2 == 0) ret = max(ret, atoi(a.c_str()));
+    else{
+        for(int i = 0; i < a.size(); i++){
+            for(int j = i + 1; j < a.size(); j++){
+                swap(a[i], a[j]);
+                ret = max(ret, atoi(a.c_str()));
+                swap(a[i], a[j]);
+            }
+        }
+    }
+
+    return;
 }
-
-int main(int argc, char** argv)
-{
-
-	cin >> T;
-
-	for(test_case = 1; test_case <= T; ++test_case)
-	{
-        
-        // INPUT
-        cin >> num >> N;
-
-        // INIT 
-        result = 0;
-
-        // PROCESS
-        dfs(0, 0);
-
-        // OUTPUT
-        cout << "#" << test_case << " " << result << "\n";
-
-	}
-	return 0;//정상종료시 반드시 0을 리턴해야합니다.
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> T;
+    for(int t = 1; t <= T; t++){
+        cin >> a >> n;
+        ret = 0;
+        go(0, n);
+        cout << "#" << t << " " << ret << "\n";
+    }
+    return 0;
 }
