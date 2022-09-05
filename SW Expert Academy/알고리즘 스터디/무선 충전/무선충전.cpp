@@ -9,7 +9,6 @@ struct User
 {
     int x;
     int y;
-    int sum;
 };
 
 struct BC
@@ -125,7 +124,6 @@ int main(int argc, char** argv)
 
         // INIT 
         result = 0;
-
 
         // 사용자A는 지도의 (1, 1) 지점에서, 사용자B는 지도의 (10, 10) 지점에서 출발한다.
         userA.x = 1; userA.y = 1;
