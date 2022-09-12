@@ -7,7 +7,7 @@ Programmers/NHN/
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++
 
 tempCodeRunnerFile.cpp
-
+.DS_STORE
 ### C++ ###
 # Prerequisites
 *.d
@@ -41,5 +41,6 @@ tempCodeRunnerFile.cpp
 *.exe
 *.out
 *.app
+*.dSYM
 
 # End of https://www.toptal.com/developers/gitignore/api/c++
