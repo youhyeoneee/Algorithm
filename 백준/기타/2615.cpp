@@ -27,9 +27,9 @@ void Input()
 }
 
 
-bool IsOmok(int color, int y, int x, int dir, int cnt)
+bool IsOmok(int color, int y, int x, int dir)
 {
-    for(; color == arr[y][x]; cnt++)
+    for(int cnt = 0; color == arr[y][x]; cnt++)
     {
         y += dy[dir]; 
         x += dx[dir];
@@ -48,7 +48,7 @@ void Solve()
             {
                 for(int dir=0; dir<4; dir++)
                 {
-                    if (IsOmok(arr[i][j], i, j, dir, 0))
+                    if (IsOmok(arr[i][j], i, j, dir))
                     {
                         int by = i - dy[dir];
                         int bx = j - dx[dir];
