@@ -1,7 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include <stack>
+#include <algorithm>
 
 #define MAX 100000
 
@@ -10,7 +10,7 @@ using namespace std;
 int N, K;
 
 int visited[MAX+4];
-vector<int> adj[MAX+4];
+int prevArr[MAX+4];
 
 
 void Input()
@@ -20,10 +20,9 @@ void Input()
 
 void Solve()
 {
-    queue<int> q;
-
     // BFS 
 
+    queue<int> q;
     q.push(N);
     visited[N] = 1;
     
@@ -45,9 +44,9 @@ void Solve()
                 // 방문하지 않았다면
                 if (!visited[next])
                 {
-                    q.push(next);
-                    visited[next] = visited[curr] + 1;
-                    adj[next].push_back(curr);
+                    q.push(next); 
+                    visited[next] = visited[curr] + 1; // 방문 처리
+                    prevArr[next] = curr; // 이전 것을 등록하여 역추적 
                 }
                 
             }
@@ -57,25 +56,20 @@ void Solve()
     cout << visited[K] - 1 << '\n';
 
 
-    int curr = K;
+    // 도착 지점에서 역추적하면서 벡터에 넣는다.
+    vector<int> v;
 
-    stack<int> s;
-    s.push(curr);
+    for(int i = K; i != N; i = prevArr[i])
+    {
+        v.push_back(i);
+    }
+    v.push_back(N); // 시작 지점도 넣기
 
-    while(curr != N)
-    {
-        for(int i : adj[curr])
-        {   
-            curr = i;
-            s.push(curr);
-        }
-    }
-    
-    while(!s.empty())
-    {
-        cout << s.top() << " ";
-        s.pop();
-    }
+    // 거꾸로 뒤집기 
+    reverse(v.begin(), v.end());
+
+    for(int i : v) cout << i << " ";
+
 
 }
 
