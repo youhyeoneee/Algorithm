@@ -17,15 +17,6 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
         v[i-1]--;
     }
     
-//     cout << "\n";
-    
-//     for(int i : v) {
-//         cout << i << " ";
-//     }
-    
-//     cout << '\n';
-
-    
         
     for(int i=0; i<v.size(); i++) {
        if (v[i] == 0) {
@@ -43,7 +34,6 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
     }
     
     for(int i : v) {
-        // cout << i << " ";
         if (i > 0) answer++;
     }
     return answer;
