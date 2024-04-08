@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <iostream>
 
 using namespace std;
@@ -8,7 +8,7 @@ using namespace std;
 string solution(vector<string> participant, vector<string> completion) {
     string answer = "";
     
-    map<string, int> m;
+    unordered_map<string, int> m;
     
     for(string name : participant) {
         m[name] += 1;
