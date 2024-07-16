@@ -30,34 +30,13 @@ int main() {
 
 
     // solve
-    unordered_map<char, int> strokes;
-    strokes.insert({'A', 3});
-    strokes.insert({'B', 2});
-    strokes.insert({'C', 1});
-    strokes.insert({'D', 2});
-    strokes.insert({'E', 3});
-    strokes.insert({'F', 3});
-    strokes.insert({'G', 3});
-    strokes.insert({'H', 3});
-    strokes.insert({'I', 1});
-    strokes.insert({'J', 1});
-    strokes.insert({'K', 3});
-    strokes.insert({'L', 1});
-    strokes.insert({'M', 3});
-    strokes.insert({'N', 3});
-    strokes.insert({'O', 1});
-    strokes.insert({'P', 2});
-    strokes.insert({'Q', 2});
-    strokes.insert({'R', 2});
-    strokes.insert({'S', 1});
-    strokes.insert({'T', 2});
-    strokes.insert({'U', 1});
-    strokes.insert({'V', 1});
-    strokes.insert({'W', 2});
-    strokes.insert({'X', 2});
-    strokes.insert({'Y', 2});
-    strokes.insert({'Z', 1});
-
+    unordered_map<char, int> strokes = {
+        {'A', 3}, {'B', 2}, {'C', 1}, {'D', 2}, {'E', 3}, {'F', 3},
+        {'G', 3}, {'H', 3}, {'I', 1}, {'J', 1}, {'K', 3}, {'L', 1},
+        {'M', 3}, {'N', 3}, {'O', 1}, {'P', 2}, {'Q', 2}, {'R', 2},
+        {'S', 1}, {'T', 2}, {'U', 1}, {'V', 1}, {'W', 2}, {'X', 2},
+        {'Y', 2}, {'Z', 1}
+    };
 
     // 문자열 -> 숫자로 변환
     vector<int> v;
