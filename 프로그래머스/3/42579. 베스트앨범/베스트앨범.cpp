@@ -6,11 +6,12 @@
 
 using namespace std;
 
-bool compare(pair<string, int> a, pair<string, int> b) {
+bool compareGenre(pair<string, int> a, pair<string, int> b) {
     return a.second > b.second;
 }
 
-bool compare2(pair<int, int> a, pair<int, int> b) {
+// 재생횟수 > 우선순위 
+bool comparePlaylist(pair<int, int> a, pair<int, int> b) {
     if (a.second == b.second) {
         return a.first < b.first;
     }
@@ -21,30 +22,30 @@ bool compare2(pair<int, int> a, pair<int, int> b) {
 vector<int> solution(vector<string> genres, vector<int> plays) {
     vector<int> answer;
     
+    // 장르 - 재생횟수 
+    map<string, int> genrePlaycnt;
+    
     // 장르 - <고유번호, 재생횟수> 
-    // 장르 내 정렬 : 재생횟수 > 고유번호 별 
-    // 장르 - 재생횟수 정렬
-    // 순서대로 합치기 
-    map<string, int> genrePlayCnt;
-    map<string, vector<pair<int, int>>> genrePlayDetail;
+    map<string, vector<pair<int, int>>> genrePlaylist;
 
     for(int i=0; i<genres.size(); i++) {
-        genrePlayCnt[genres[i]] += plays[i];
-        genrePlayDetail[genres[i]].push_back({i, plays[i]});
+        string genre = genres[i];
+        genrePlaycnt[genre] += plays[i];
+        genrePlaylist[genre].push_back({i, plays[i]});
     }
     
-    vector<pair<string, int>> v(genrePlayCnt.begin(), genrePlayCnt.end());
-    sort(v.begin(), v.end(), compare);
+    // 정렬 위해 벡터로 변환 
+    vector<pair<string, int>> v(genrePlaycnt.begin(), genrePlaycnt.end());
+    sort(v.begin(), v.end(), compareGenre);
     
     for(auto m : v) {
         string genre = m.first; 
-        vector<pair<int, int>> numberPlayCnt = genrePlayDetail[genre];
-        sort(numberPlayCnt.begin(), numberPlayCnt.end(), compare2);
+        sort(genrePlaylist[genre].begin(), genrePlaylist[genre].end(), comparePlaylist);
         
-        int cnt = min(2, (int)numberPlayCnt.size());
+        int cnt = min(2, (int)genrePlaylist[genre].size());
                       
        for(int i=0; i<cnt; i++) {
-           answer.push_back(numberPlayCnt[i].first);
+           answer.push_back(genrePlaylist[genre][i].first);
        }
     }    
     
