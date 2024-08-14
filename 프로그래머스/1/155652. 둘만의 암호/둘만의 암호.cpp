@@ -5,21 +5,19 @@ using namespace std;
 
 bool skipAlphabets[26];
 
-char changeAlphabet(char a, int idx) {
-    
+int changeIdx(int currIdx, int idx) {
     int cnt = 0;
-    int aIdx = a - 'a';
     
     while(cnt < idx) {
-        aIdx = (aIdx + 1) % 26;
-        if (skipAlphabets[aIdx]) {
+        currIdx = (currIdx + 1) % 26;
+        if (skipAlphabets[currIdx]) {
             continue;
         }
         
         cnt++;
     }
     
-    return (char)(aIdx + 'a');
+    return currIdx;
 }
 
 string solution(string s, string skip, int index) {
@@ -28,11 +26,10 @@ string solution(string s, string skip, int index) {
     for(char ch : skip) {
         skipAlphabets[ch - 'a'] = true;
     }
-    
-    int mod = 26;
-    
+        
     for(char ch : s) {
-        answer += changeAlphabet(ch, index);
+        int idx = changeIdx(ch - 'a', index);
+        answer += (char)(idx + 'a');
     }
     
     return answer;
