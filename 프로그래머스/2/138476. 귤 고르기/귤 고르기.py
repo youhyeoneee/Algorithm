@@ -1,16 +1,10 @@
-from collections import defaultdict
+from collections import Counter
 
 def solution(k, tangerine):
-    
-    count_dict = defaultdict(int)    
-    for t in tangerine:
-        count_dict[t] += 1
-    
-    counts = list(count_dict.values())
-    counts.sort(reverse=True)
-    
+        
+    counts = Counter(tangerine).most_common(k)
     answer = 0
-    for count in counts:
+    for size, count in counts:
         k -= count
         answer += 1
 
