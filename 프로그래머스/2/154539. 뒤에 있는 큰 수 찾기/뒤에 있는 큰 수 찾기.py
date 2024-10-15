@@ -4,9 +4,10 @@ def solution(numbers):
     stack = []
     
     for idx in range(n):
-        while len(stack) > 0 and numbers[idx] > numbers[stack[-1]]:
-            answer[stack[-1]] = numbers[idx]
-            stack.pop()
+        target = numbers[idx]
+        while stack and target > numbers[stack[-1]]:
+            answer[stack.pop()] = target
+            
         stack.append(idx)
     
     return answer
