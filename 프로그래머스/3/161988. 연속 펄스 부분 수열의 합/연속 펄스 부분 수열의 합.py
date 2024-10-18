@@ -1,3 +1,18 @@
+def find_max_sum(arr):
+    max_value = max(arr)
+    max_value_index = arr.index(max_value)
+    min_value = 0
+    if max_value_index:
+        min_value = min(arr[:max_value_index])    
+    return max_value - min_value
+
+def set_presum(arr):
+    presum = [0]
+    
+    for i in range(1, len(arr)+1):
+        presum.append(presum[i-1] + arr[i-1])
+    return presum
+
 def solution(sequence):
     answer = 0
     n = len(sequence)
@@ -10,32 +25,10 @@ def solution(sequence):
         perse_1.append(num * sequence[i])
         perse_2.append(-num * sequence[i])
         num *= -1
-
-    presum_1, presum_2 = [0], [0]
     
-    for i in range(1, n+1):
-        presum_1.append(presum_1[i-1] + perse_1[i-1])
-        presum_2.append(presum_2[i-1] + perse_2[i-1])
-
-    # 누적합 max
-
-    max_value = max(presum_1)
-    max_value_index = presum_1.index(max_value)
-    # print(max_value_index)
-    min_value = 0
-    if max_value_index:
-        min_value = min(presum_1[:max_value_index])
-    answer = max(max_value - min_value, answer)
+    # 누적합 
+    presum_1, presum_2 = set_presum(perse_1), set_presum(perse_2)
     
-     # 누적합 max
-    # print(presum_2)
-    max_value = max(presum_2)
-    max_value_index = presum_2.index(max_value)
-    min_value = 0
-    if max_value_index:
-        min_value = min(presum_2[:max_value_index])
-    # print(max_value, min_value)
-
-    answer = max(max_value - min_value, answer)   
-    
+    # 가장 큰 부분 수열의 합 구하기 
+    answer = max(answer, find_max_sum(presum_1), find_max_sum(presum_2))
     return answer
