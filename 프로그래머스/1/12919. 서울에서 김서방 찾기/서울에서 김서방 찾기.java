@@ -2,9 +2,13 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] seoul) {
-        int idx = Arrays.asList(seoul).indexOf("Kim");
+        int x = 0;
         
-        String answer = "김서방은 " + idx + "에 있다";
-        return answer;
+        for(String value: seoul) {
+            if (value.equals("Kim")) break;
+            x++;
+        }
+
+        return "김서방은 "+ x + "에 있다";
     }
 }
