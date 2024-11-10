@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.StringBuilder;
 
 class Solution {
     public String solution(String[] seoul) {
@@ -8,7 +9,7 @@ class Solution {
             if (value.equals("Kim")) break;
             x++;
         }
-
-        return "김서방은 "+ x + "에 있다";
+        
+        return new StringBuilder("김서방은 ").append(x).append("에 있다").toString();
     }
 }
